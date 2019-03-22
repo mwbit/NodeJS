@@ -7,10 +7,10 @@ const db = require("./config/db");
 app.db = db;
 
 consign()
+  .include("./config/passport.js")
   .then("./config/middlewares.js")
   .then("./api/validation.js")
-  .then("./api/auth.js")
-  .then("./api/user.js")
+  .then("./api")
   .then("./api/category.js")
   .then("./config/routes.js")
   .into(app);
