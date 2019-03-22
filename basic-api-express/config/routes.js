@@ -1,4 +1,8 @@
 module.exports = app => {
+  app.route("/signup").post(app.api.user.save);
+  app.route("/signin").post(app.api.auth.signin);
+  app.route("/validateToken").post(app.api.auth.validateToken);
+
   app
     .route("/users")
     .post(app.api.user.save)
