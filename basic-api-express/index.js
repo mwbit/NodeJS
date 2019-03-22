@@ -10,6 +10,7 @@ consign()
   .then("./config/middlewares.js")
   .then("./api/validation.js")
   .then("./api/user.js")
+  .then("./api/category.js")
   .then("./config/routes.js")
   .into(app);
 
