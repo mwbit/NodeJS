@@ -38,7 +38,11 @@ module.exports = app => {
         .db("articles")
         .where({ id: req.params.id })
         .del();
-      notExistsOrError(rowsDeleted, "Artigo não encontrado.");
+      try {
+        notExistsOrError(rowsDeleted, "Artigo não encontrado.");
+      } catch (err) {
+        return res.status(400).send(msg);
+      }
       res.status(204).send();
     } catch (msg) {
       res.status(500).send(msg);
