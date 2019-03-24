@@ -36,6 +36,7 @@ module.exports = app => {
         .where({ parentId: req.params.id });
 
       notExistsOrError(subcategory, "Categoria possui subcategorias.");
+
       const articles = await app
         .db("articles")
         .where({ categoryId: req.params.id });
@@ -45,7 +46,9 @@ module.exports = app => {
         .db("categories")
         .where({ id: req.params.id })
         .del();
+
       exitsOrError(rowsDeleted, "Categoria não foi encontrada.");
+
       res.status(204).send();
     } catch (msg) {
       res.status(400).send(msg);
