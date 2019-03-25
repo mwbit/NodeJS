@@ -22,5 +22,6 @@ describe("Test the users path", () => {
       .get("/users")
       .set("Authorization", `Bearer ${token}`);
     expect(response.status).toBe(200);
+    expect(response.type).toBe("application/json");
   });
 });
