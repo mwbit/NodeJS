@@ -45,7 +45,6 @@ module.exports = app => {
         .then(_ => res.status(204).send())
         .catch(err => res.status(500).send(err));
     } else {
-      console.log(user);
       app
         .db("users")
         .insert(user)

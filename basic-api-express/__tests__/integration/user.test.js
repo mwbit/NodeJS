@@ -10,18 +10,35 @@ beforeAll(done => {
       email: "teste@teste.com",
       password: "123456"
     })
-    .end((err, response) => {
-      token = response.body.token; // save the token!
+    .end((err, res) => {
+      token = res.body.token; // save the token!
       done();
     });
 });
 
 describe("Test the users path", () => {
-  test("It should response the GET method", async () => {
-    const response = await request(app)
+  it("It should response the get method", async () => {
+    const res = await request(app)
       .get("/users")
       .set("Authorization", `Bearer ${token}`);
-    expect(response.status).toBe(200);
-    expect(response.type).toBe("application/json");
+    expect(res.status).toBe(200);
+    expect(res.type).toBe("application/json");
+  });
+
+  it("It should response the getById method", async () => {
+    const res = await request(app)
+      .get("/users/1")
+      .set("Authorization", `Bearer ${token}`);
+    expect(res.status).toBe(200);
+    expect(res.type).toBe("application/json");
+  });
+
+  it("It should response the getById method return empty", async () => {
+    const res = await request(app)
+      .get("/users/1000")
+      .set("Authorization", `Bearer ${token}`);
+    expect(res.status).toBe(200);
+    expect(res.type).toBe("application/json");
+    expect(res.body.name).toEqual(undefined);
   });
 });
